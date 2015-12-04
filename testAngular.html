@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+    <!-- Meta-Information -->
+    <title>Media Center</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Vendor: Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+  </head>
+
+  <body ng-app="mediaCenter">
+    <div ng-controller="ctrl">
+        <div ng-repeat="torrent in torrents">
+            <p><b>Torrent --></b> {{torrent}}</p>
+        </div>
+    </div>
+  </body>
+
+</html>
+
+<script type="text/javascript">
+
+/**
+ * Init angular module
+ */
+var app = angular.module('mediaCenter', []);
+
+/**
+ * Controls torrents
+ */
+app.controller("ctrl", ['$scope', '$http', '$templateCache',
+   function ($scope, $http, $templateCache) {
+
+      // Get available torrents
+      $scope.getTorrents = function() {
+        // Http parameters
+        var config = {
+         /** Test purpose 
+          $scope.torrents = [{'id': '1', 'body': 'content'},{'id': '2', 'body': 'content2'}];
+          **/
+          url: 'http://jsonplaceholder.typicode.com',
+          /*url: 'http://api.t411.in/torrents/search/avatar',*/
+          method: 'GET',
+         /* headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Authorization',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'XXXXXXXXXXXXXXXXXXXX'
+          },*/
+          /*crossDomain: true,*/
+          /*cache: $templateCache*/
+        }
+
+        // Http call with params array
+        $http(config).
+          // Success request
+          then(function(response) {
+            console.log("success");
+            console.log(response);
+            $scope.torrents = response;
+          }).
+          // Fail request
+          then(function(response) {
+            console.log("error");
+            console.log(response);
+          })
+          ;
+      }
+
+      // Init torrents list
+      $scope.torrents = $scope.getTorrents();
+      /** Test purpose 
+      $scope.torrents = [{'id': '1', 'body': 'content'},{'id': '2', 'body': 'content2'}];
+      **/
+      console.log($scope.torrents);
+}]);
+</script>
