@@ -37,7 +37,9 @@ app.controller("ctrl", ['$scope', '$http', '$templateCache',
       $scope.getTorrents = function() {
         // Http parameters
         var config = {
-         /** Test purpoose  **/
+         /** Test purpose 
+          $scope.torrents = [{'id': '1', 'body': 'content'},{'id': '2', 'body': 'content2'}];
+          **/
           url: 'http://jsonplaceholder.typicode.com',
           /*url: 'http://api.t411.in/torrents/search/avatar',*/
           method: 'GET',
@@ -58,9 +60,7 @@ app.controller("ctrl", ['$scope', '$http', '$templateCache',
             console.log("success");
             console.log(response);
             $scope.torrents = response;
-          }).
-          // Fail request
-          then(function(response) {
+          },function errorCallback(response) {
             console.log("error");
             console.log(response);
           })
