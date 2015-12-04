@@ -37,9 +37,7 @@ app.controller("ctrl", ['$scope', '$http', '$templateCache',
       $scope.getTorrents = function() {
         // Http parameters
         var config = {
-         /** Test purpose 
-          $scope.torrents = [{'id': '1', 'body': 'content'},{'id': '2', 'body': 'content2'}];
-          **/
+         /** Test purpoose  **/
           url: 'http://jsonplaceholder.typicode.com',
           /*url: 'http://api.t411.in/torrents/search/avatar',*/
           method: 'GET',
